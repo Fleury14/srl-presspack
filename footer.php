@@ -6,11 +6,11 @@
 					<p>Created by J.R. Ruggiero</p>
 				</div>
 				<div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
-					<a href="#">Home</a>
-					<a href="#">Current Races</a>
-					<a href="#">Player Stats</a>
-					<a href="#">Game Stats</a>
-					<a href="#">Player Rankings</a>
+					<a href="/">Home</a>
+					<a href="/currentraces">Current Races</a>
+					<a href="/statpage">Player Stats</a>
+					<a href="/ff4festats">Game Stats</a>
+					<a href="/player-rankings">Player Rankings</a>
 				</div>
 			</div>
 		</div>
