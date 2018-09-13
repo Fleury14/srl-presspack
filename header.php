@@ -18,16 +18,16 @@
 				<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="/?page_id=12">Player Stats</a>
+				<a class="nav-link" href="/statpage">Player Stats</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="/?page_id=15">Game Stats</a>
+				<a class="nav-link" href="/ff4festats">Game Stats</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="/?page_id=20">Current Races</a>
+				<a class="nav-link" href="/currentraces">Current Races</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="/?page_id=22">Player Rankings</a>
+				<a class="nav-link" href="/player-rankings">Player Rankings</a>
 			</li>
 			</ul>
 			<?php $userinfo = wp_get_current_user(); 
