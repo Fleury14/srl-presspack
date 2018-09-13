@@ -75,7 +75,7 @@ foreach( $race_info->races as $race ) {
                                         $endFlagPos = strpos($race->goal, '&amp');
                                         $flags = substr($race->goal, $flagsPos + 6, $endFlagPos - $flagsPos - 6);
                                         ?>
-                                        <p>Flags: <?php echo $flags;
+                                        <p class="current-race-flags">Flags: <?php echo $flags;
                                             if ($flags == 'J2KC2T4S3BF2NE3$X2Y2GWZ') { echo ' (League Qualifier)'; }
                                             if ($flags == 'JK2PCT3S2BF2NE3X2Y2GZ') { echo ' (League Ro.32)'; }
                                             if ($flags == 'JK2PC3T3S2BF2NE3X2Y2GZ') { echo ' (League Playoffs)'; }
