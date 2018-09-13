@@ -1,4 +1,3 @@
-<h1 class="mb-5">MARGIN</h1>
 <?php get_header();
 	$player_name = $_GET['player'] ? $_GET['player'] : 'Fleury14';
 	// FF4 target profile stat curl
