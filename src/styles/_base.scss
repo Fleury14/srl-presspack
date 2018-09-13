@@ -190,3 +190,21 @@ figure {
 }
 
 // END BASE INDEX STYLES
+
+/* BEGIN FOOTER STYLES */
+
+footer {
+  background-color: #010059;
+  color: #eee;
+  font-size: 12px;
+
+  .container-fluid {
+    height: 150px;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+/* END FOOTER STYLES */
