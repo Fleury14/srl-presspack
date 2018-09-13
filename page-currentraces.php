@@ -62,7 +62,7 @@ foreach( $race_info->races as $race ) {
                                             <?php
                                                 $totalSkill += $value->trueskill;
                                             }
-                                            $averageSkill = round($totalSkill / $race->numentrants);
+                                            $averageSkill = $race->numentrants > 0 ? round($totalSkill / $race->numentrants) : 0;
                                             ?>
                                         </div>
                                     </div>
