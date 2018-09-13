@@ -5,7 +5,7 @@
 <!-- <p>Photo by Donald Giannatti on Unsplash</p> -->
 <div class="container">
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-8">
       <?php if (have_posts()): while (have_posts()) : the_post() ?>
       <article>
         <h3> <?php the_title(); ?></h3>
@@ -16,11 +16,13 @@
       <?php endwhile;
       endif; ?>
     </div>
-    <div class="col-sm-6 featured">
+    <div class="col-sm-4 featured">
       <figure class="figure">
         <div class="laptop-image"></div>
-        <h3>Check out our featured thing</h3>
-        <figcaption class="figure-caption">"This thing is awesome! How is this even a thing...." -- Some dude</figcaption>
+        <h2 class="press-start text-uppercase">Links</h2>
+        <a target="_blank" href="http://ff4fe.com">FF4 Free Enterprise Site</a>
+        <a target="_blank" href="http://speedrunslive.com">SpeedRunsLive</a>
+        <a target="_blank" href="https://discord.gg/AVeUqkb">FF4: FE Discord</a>
       </figure>
       
     </div>
