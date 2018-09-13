@@ -13,6 +13,19 @@
     curl_close($curl);
     $past_races = json_decode($info);
 
+    // get general game info
+    $general_curl = curl_init();
+    curl_setopt_array($general_curl, array(
+        CURLOPT_RETURNTRANSFER => 1,
+        CURLOPT_URL => 'http://api.speedrunslive.com/stat?game=ff4hacks&season=0',
+        CURLOPT_HTTPHEADER => array(
+            "Content-Type: application/json"
+        )
+    ));
+    $general_info = curl_exec($general_curl);
+    curl_close($general_curl);
+    $ff4_info = json_decode($general_info);
+
     
     // throw all league flag races into its respective array
     $league_qual_races = array();
@@ -65,6 +78,18 @@
 
 			<!-- article -->
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <p class="opening-stats">Popularity on SRL: <span class="audiowide">#<?php echo $ff4_info->game->popularityrank; ?><span></p>
+                            <p class="opening-stats">Largest Race: <span class="audiowide"><?php echo $ff4_info->stats->largestRaceSize; ?></span></p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <p class="opening-stats">Total # of races: <span class="audiowide"><?php echo $ff4_info->stats->totalRaces; ?></span></p>
+                            <p class="opening-stats">Total # of racers: <span class="audiowide"><?php echo $ff4_info->stats->totalPlayers; ?></span></p>
+                        </div>
+                    </div>
+                </div>
                 <h2>Community Races</h2>
                 <p>Total Community Races: <?php echo count($community_races); ?></p>
                 <p>Most recent race</p>
