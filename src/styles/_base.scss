@@ -27,6 +27,26 @@ html {
   font-family: 'Open Sans', sans-serif;
 }
 
+.blue-bg {
+  background-color: #010059;
+  color: #eee;
+  border: 2px solid #212079;
+}
+
+.accordion-link {
+  color: #eee;
+  width: 100%;
+  text-align: left;
+}
+
+.link-button {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  padding: 5px 20px;
+  border-radius: 3px;
+}
+
 html, body {
   height: 100%;
 }

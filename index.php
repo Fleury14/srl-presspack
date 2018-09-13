@@ -30,24 +30,28 @@
 <?php
 $pages = get_pages();
 // var_dump($pages); ?>
-<div class="container">
-  <div class="row">
-    <?php foreach ($pages as $page): ?>
 
-    <div class="col-md-4 col-sm-6">
-      <div class="card page-card mb-5" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title"> <?php echo $page->post_title; ?> </h5>
-          <p class="sub-text"> <?php echo $page->post_date; ?> by <?php echo $page->post_author ?> </p>
-          <div class="card-text"> <?php $content = strlen($page->post_content) > 200 ? substr($page->post_content, 0, 200) . '...' :  $page->post_content; echo $content;  ?> </div>
-          <a href="/?page_id=<?php echo $page->ID ?>" class="btn btn-primary">Visit Page</a>
-        </div>
+
+<div class="accordion" id="accordionExample">
+  <?php for ($i = 0; $i < count($pages); $i++): ?>
+  <div class="card-header blue-bg" id="heading<?php echo $i; ?>">
+      <h5 class="mb-0 position-relative">
+        <button class="btn btn-link <?php if ($i === 0) { echo 'collapsed '; } ?>accordion-link" type="button" data-toggle="collapse" data-target="#collapse-<?php echo $i; ?>" aria-expanded="true" aria-controls="collapse<?php echo $i; ?>">
+          <?php echo $pages[$i]->post_title; ?>
+        </button>
+        <a href="/?page_id=<?php echo $pages[$i]->ID; ?>"><button class="btn-info link-button">Visit Page</button></a>
+      </h5>
+    </div>
+
+    <div id="collapse-<?php echo $i; ?>" class="collapse" aria-labelledby="heading<?php echo $i; ?>" data-parent="#accordionExample">
+      <div class="card-body">
+        <?php echo $pages[$i]->post_content ?>
       </div>
     </div>
-<?php endforeach; ?>
   </div>
+  <?php endfor; ?>
+  
 </div>
-
 
 
 <?php get_footer(); ?>
