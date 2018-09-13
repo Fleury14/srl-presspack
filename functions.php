@@ -96,9 +96,16 @@ function get_post_for_url($data)
 
 function zScore($race) {
     $raceTimes = array();
+    $raceLongTime = getLongestTime($race);
+    $forfeitPenalty = 60 * 5;
     // put all times into one array
     foreach ($race->results as $result) {
-        array_push($raceTimes, $result->time);
+        if ($result->time === -1) {
+            array_push($raceTimes, $raceLongTime + $forfeitPenalty); // if its a forfeit, add 5 minutes to the longest time
+        } else {
+            array_push($raceTimes, $result->time);
+        }
+        
     }
     // calculate mean
     $standaredMean = array_sum($raceTimes) / count($raceTimes);
@@ -107,6 +114,7 @@ function zScore($race) {
     $sqrdDiff = array();
     // populate array of squared differences
     foreach ($raceTimes as $time) {
+        if ($time === -1) {$time = $raceLongTime + $forfeitPenalty;}
         array_push($sqrdDiff, pow($time - $standaredMean, 2));
     }
     // get the mean of squred differences
@@ -116,8 +124,16 @@ function zScore($race) {
     $race->stdDev = $stdDev;
 
     foreach ($race->results as $result) {
-        $result->zScore = ($result->time - $race->stdMean) / $race->stdDev;
+        $result->zScore = ( ($result->time === -1 ? $raceLongTime + $forfeitPenalty : $result->time) - $race->stdMean) / $race->stdDev;
     }
+}
+
+function getLongestTime($race) {
+    $longestTime = 0;
+    foreach ($race->results as $result) {
+        if ($result->time > $longestTime) {$longestTime = $result->time;} 
+    }
+    return $longestTime;
 }
 
 function timeCmp($race1, $race2) {
