@@ -15,10 +15,16 @@ export default {
         function addZScore(race) {
             // This function takes in a race and assigns a standard mean, standard deviation for the race and a z-score for each individual playeer
 
-            const raceTimes = []
+            const raceTimes = [];
+            const raceLongTime = getLongestTime(race);
+            const forfeitPenalty = 60 * 5;
             // put all times into one array
             race.results.forEach(result => {
-                raceTimes.unshift(result.time);
+                if (result.time === -1) {
+                    raceTimes.unshift(raceLongTime + forfeitPenalty);
+                } else {
+                    raceTimes.unshift(result.time);
+                }
             });
             
             // calculate mean
@@ -28,8 +34,9 @@ export default {
             const sqrdDiff = [];
             // populate array of squared differences
             raceTimes.forEach(time => {
+                if (time === -1) time = raceLongTime + forfeitPenalty;
                 sqrdDiff.unshift(Math.pow(time - standaredMean, 2));
-            })
+            });
             
             // get the mean of squred differences
             let sqrdMean = sqrdDiff.reduce((a, b) => a + b, 0) / sqrdDiff.length;
@@ -39,9 +46,17 @@ export default {
 
             // assign each calculated z-score to the respective result
             race.results.forEach(result => {
-                result['zScore'] = (result.time - race.stdMean) / race.stdDev;
+                result['zScore'] = ((result.time === -1 ? raceLongTime + forfeitPenalty : result.time) - race.stdMean) / race.stdDev;
             })
             
+        }
+
+        function getLongestTime(race) {
+            let longestTime = 0;
+            race.results.forEach(result => {
+                if (result.time > longestTime) longestTime = result.time;
+            });
+            return longestTime;
         }
 
         function preparePastRaces(races) {
