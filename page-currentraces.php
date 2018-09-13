@@ -193,13 +193,13 @@ foreach( $race_info->races as $race ) {
                                     <tbody>
                                     <?php for ($place = 1; $place <= $race->numentrants; $place++ ): ?>
                                         <tr>
-                                            <th scope="row"><?php echo $place; ?></th>
-                                            <td>
+                                            <th scope="row" class="press-start"><?php echo $place; ?></th>
+                                            <td class="audiowide">
                                                 <?php foreach ($race->entrants as $racer => $value) {
                                                     if ($value->place == $place) { echo $value->displayname; }
                                                 }  ?>
                                             </td>
-                                            <td>
+                                            <td class="press-start">
                                                 <?php foreach ($race->entrants as $racer => $value) {
                                                     if ($value->place == $place) { 
                                                         $hours = floor($value->time / 3600);
