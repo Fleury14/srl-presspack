@@ -31,7 +31,6 @@ foreach( $race_info->races as $race ) {
 			<!-- article -->
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			
-                <?php the_content(); ?>
                 <div class="container">
 
                 <?php 
@@ -42,11 +41,11 @@ foreach( $race_info->races as $race ) {
                 ?>
                     <div class="row row-eq-height full-race-row">
                         <div class="col-md-3 race-status">
-                            <h2><?php echo $race->statetext; ?></h2>
+                            <h2 class="audiowide"><?php echo $race->statetext; ?></h2>
                             <p><?php echo 'Started at ' . date('h:m:sa T', $race->time) ?></p>
                         </div>
                         <div class="col-md-9 race-info text-center">
-                            <h2 class="text-center"><?php echo $race->numentrants ?> participants</h2>
+                            <h2 class="text-center audiowide"><?php echo $race->numentrants ?> participant<?php if ($race->numentrants > 1) { echo 's'; } ?></h2>
                             <div class="container-fluid">
                                 <div class="row">
                                     
@@ -69,7 +68,7 @@ foreach( $race_info->races as $race ) {
                                     </div>
                                     <div class="col-md-8 order-1">
                                         <div class="d-flex justify-content-center align-items-center no-child-margin mb-3">
-                                            <p class="mr-3">Average Skill Rating: </p><span class="h2"><?php echo $averageSkill ?></span>
+                                            <p class="mr-3 press-start">Average Skill Rating: </p><span class="h2 audiowide"><?php echo $averageSkill ?></span>
                                         </div>
                                         
                                         <?php
@@ -225,7 +224,6 @@ foreach( $race_info->races as $race ) {
                 ?>
                 </div>
 				
-				<?php edit_post_link(); ?>
 
 			</article>
 			<!-- /article -->
