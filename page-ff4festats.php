@@ -100,12 +100,18 @@
                     <div class="row p-3">
                         <?php for($i = 0; $i < $recent_community_race->numentrants; $i++): ?>
                         <div class="col-md-4 community-results">
-                            <p class="m-0 p-2"><?php echo $recent_community_race->results[$i]->player ?>: <?php
-                                $hours = floor($recent_community_race->results[$i]->time / 3600);
-                                $minutes = floor($recent_community_race->results[$i]->time / 60 % 60);
-                                $seconds = floor($recent_community_race->results[$i]->time % 60);
-                                echo sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);?></p>
+                            <p class="m-0 p-2 audiowide"><?php echo $recent_community_race->results[$i]->player ?>: <span class="press-start community-race-time"><?php
+                                if ($recent_community_race->results[$i]->time === -1) {
+                                    echo 'Forfeit';
+                                } else {
+                                    $hours = floor($recent_community_race->results[$i]->time / 3600);
+                                    $minutes = floor($recent_community_race->results[$i]->time / 60 % 60);
+                                    $seconds = floor($recent_community_race->results[$i]->time % 60);
+                                    echo sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);?></span></p>
+                                <?php } ?>
                                 <p class="z-score m-0 p-0">Rank: <?php echo $i + 1; ?> Z-S: <?php echo number_format($recent_community_race->results[$i]->zScore, 3, '.', ','); ?></p>
+
+                                
                         </div>
                         <?php endfor; ?>
                     </div>
