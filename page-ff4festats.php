@@ -88,9 +88,9 @@
                         </div>
                     </div>
                 </div>
-                <h2>Community Races</h2>
-                <p>Total Community Races: <?php echo count($community_races); ?></p>
-                <p>Most recent race</p>
+                <h2 class="press-start text-uppercase text-center mt-5">Community Races</h2>
+                <p class="text-center"><?php echo count($community_races); ?> Community Races on record</p>
+                <p class="press-start text-center text-uppercase">Recent race summary</p>
                 <div class="container community-container">
                     <div class="row">
                         <div class="col-md-12 community-header d-flex justify-content-center align-items-center p-2">
