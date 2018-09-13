@@ -1,0 +1,22 @@
+.login-form {
+    position: absolute;
+    background-color: #333;
+    color: #eee;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    width: 50%;
+    min-width: 300px;
+}
+
+#loginform {
+    display: flex;
+    flex-direction: column;
+    
+    p {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+}

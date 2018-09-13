@@ -1,0 +1,143 @@
+.banner {
+    height: 260px;
+    background: url('../img/ff4-fe-title.jpg');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #eee;
+    margin-bottom: 50px;
+}
+
+.sub-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #010065;
+    color: #eee;
+    padding: 30px;
+    
+    h1 {
+        font-size: 48px;
+    }
+    p {
+        margin: 0;
+        font-size: 24px;
+    }
+
+}
+
+.time-rows {
+    margin-bottom: 100px;
+}
+
+.summary-margin {
+    margin-bottom: 100px;
+}
+
+.race-summary {
+    margin-top: 50px;
+
+    .summary-left {
+        background-color: #333;
+        color: #eee;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .summary-row {
+        display: flex;
+        align-items: center;
+        height: 31px;
+
+        p {
+            margin-right: 20px;
+            margin-bottom: 0;
+        }
+
+        p:nth-child(2) {
+            font-size: 24px;
+            color: red;
+        }
+
+        .progress {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+    }
+}
+
+.x-days {
+    background-color: #010065;
+    color: #eee;
+}
+
+
+.gold-bg {
+    background-color: gold;
+    color: #333;
+}
+
+.silver-bg {
+    background-color: silver;
+    color: #333;
+}
+
+.bronze-bg {
+    background-color: burlywood;
+    color: #333;
+}
+
+.maroon-bg {
+    background-color: #edaba7;
+    color: #333;
+}
+
+#ratingOverTime {
+    width: 100% !important;
+}
+
+.race-tag {
+    border: 1px solid #333;
+    padding: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    min-width: 36px;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+    transition: 0.4s all;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.active-tag {
+    background-color: #010065;
+    color: #eee;
+}
+
+.past-race-header {
+    font-size: 12px;
+    background-color: #010065;
+    color: #eee;
+    padding: 5px;
+}
+
+.positive-change {
+    color: #006500;
+}
+
+.negative-change {
+    color: #650000;
+}
+
+.blue-highlight {
+    color: #010065;
+}

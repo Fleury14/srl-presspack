@@ -94,6 +94,47 @@ function get_post_for_url($data)
     return $controller->get_item($request);
 }
 
+function zScore($race) {
+    $raceTimes = array();
+    // put all times into one array
+    foreach ($race->results as $result) {
+        array_push($raceTimes, $result->time);
+    }
+    // calculate mean
+    $standaredMean = array_sum($raceTimes) / count($raceTimes);
+    $race->stdMean = $standaredMean;
+
+    $sqrdDiff = array();
+    // populate array of squared differences
+    foreach ($raceTimes as $time) {
+        array_push($sqrdDiff, pow($time - $standaredMean, 2));
+    }
+    // get the mean of squred differences
+    $sqrdMean = array_sum($sqrdDiff) / count($sqrdDiff);
+    // and from that get std dev and assign it to race
+    $stdDev = sqrt($sqrdMean);
+    $race->stdDev = $stdDev;
+
+    foreach ($race->results as $result) {
+        $result->zScore = ($result->time - $race->stdMean) / $race->stdDev;
+    }
+}
+
+function timeCmp($race1, $race2) {
+    $race1Time = null;
+    $race2Time = null;
+    global $player_name;
+    foreach ($race1->results as $result) {
+        if (strtolower($result->player) == strtolower($player_name)) { $race1Time = $result->time; }
+    }
+    foreach ($race2->results as $result) {
+        if (strtolower($result->player) == strtolower($player_name)) { $race2Time = $result->time; }
+    }
+    if ($race1Time === -1) { $race1Time = 99999; }
+    if ($race2Time === -1) { $race2Time = 99999; }
+    return $race1Time - $race2Time;
+}
+
 add_filter('body_class', 'add_slug_to_body_class'); // Add slug to body class (Starkers build)
 
 // Add page slug to body class, love this - Credit: Starkers Wordpress Theme

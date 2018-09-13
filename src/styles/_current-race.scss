@@ -1,0 +1,66 @@
+section {
+    margin-top: 50px;
+}
+
+.full-race-row {
+    margin-bottom: 50px;
+    border: 2px solid #333;
+}
+
+.race-status {
+    background-color: #333;
+    color: #eee;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+        margin-bottom: 20px;
+    }
+}
+
+.race-info {
+
+    padding-left: 0;
+    padding-right: 0;
+    transition: 0.5s all;
+
+    h2 {
+        background-color: #010065;
+        color: #eee;
+        padding: 10px;
+    }
+
+    .racer-list {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .racer-container {
+        margin: 5px;
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+    }
+
+    .racer {
+        margin-right: 5px;
+    }
+
+    table {
+        opacity: 1;
+        width: 100%;
+    }
+
+    .hide-results {
+        display: none;
+        opacity: 0;
+    }
+}
+
+.results-container {
+    opacity: 1;
+    transition: 0.5s all;
+}
