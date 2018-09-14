@@ -42,7 +42,9 @@ foreach( $race_info->races as $race ) {
                         <div class="col-md-3 race-status">
                             <h2 class="audiowide"><?php echo $race->statetext; ?></h2>
                             <p><?php echo 'Started at ' . date('h:i:sa T', $race->time) ?></p>
+                            <?php if (strtolower($race->statetext) === 'in progress' ): ?>
                             <div class="race-clock press-start" data-start="<?php echo $race->time; ?>"></div>
+                            <?php endif; ?>
                         </div>
                         <div class="col-md-9 race-info text-center">
                             <h2 class="text-center audiowide"><?php echo $race->numentrants ?> participant<?php if ($race->numentrants > 1) { echo 's'; } ?></h2>
