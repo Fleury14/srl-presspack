@@ -117,10 +117,15 @@
 	$league_ro16_last10avg = $league_ro16_last10sum / count($league_ro16_last10);
 
 	$opponents = array();
+
+	function totalGamesCmp($player1, $player2) {
+		return ($player2["wins"] + $player2["losses"]) - ($player1["wins"] + $player1["losses"]);
+	}
+
 	foreach ($all_my_races as $race) {
 		$myTime = findMyTime($race);
 		foreach ($race->results as $result) {
-			if ($result->player === $player_name) {
+			if (strtolower($result->player) === strtolower($player_name)) {
 				continue;
 			} else {
 				if (array_key_exists($result->player, $opponents) == false) {
@@ -128,14 +133,14 @@
 						"wins" => 0,
 						"losses" => 0
 					);
-					if ($result->time > $myTime) {
+					if ($result->time > $myTime || $result->time === -1) {
 						$opponents[$result->player]["wins"]++;
 					} else {
 						// var_dump($opponents[$result->player]);
 						$opponents[$result->player]["losses"]++;
 					}
 				} else {
-					if ($result->time > $myTime) {
+					if ($result->time > $myTime || $result->time === -1) {
 						$opponents[$result->player]["wins"]++;
 					} else {
 						$opponents[$result->player]["losses"]++;
@@ -144,7 +149,7 @@
 			}
 		}
 	}
-	var_dump($opponents);
+	uasort($opponents, "totalGamesCmp");
 
 ?>
 
@@ -271,7 +276,19 @@
 						
 					</div>
 					<!--- End # of races in x days section -->
-					
+					<!-- begin win-loss section -->
+					<div class="row win-loss-row">
+						<div class="col-sm-12">
+							<p>Win Loss record against other racers</p>
+						</div>
+						<?php foreach($opponents as $opponent=>$value):?>
+						<div class="col-sm-2 win-loss">
+							<p class="audiowide"><?php echo $opponent; ?></p>
+							<p class="press-start"><?php echo $value["wins"]; ?>-<?php echo $value["losses"]; ?></p>
+						</div>
+						<?php endforeach; ?>
+					</div>
+					<!-- End win-loss section -->
 					<!--- Begin Flag type section -->
 					<div class="row">
 						<div class="col-sm-4 mini-table mr-0">
