@@ -62,7 +62,7 @@
     function placeCmp($result1, $result2) {
         return $result1->place - $result2->place;
     }
-    
+
     usort($league_qual_races, "winningTimeCmp");
     usort($league_ro32_races, "winningTimeCmp");
     usort($league_ro16_races, "winningTimeCmp");
@@ -70,6 +70,7 @@
     $recent_community_race = $community_races[count($community_races) - 1];
     zScore($recent_community_race);
     // var_dump($league_qual_races);
+    usort($recent_community_race->results, "placeCmp");
 
 ?>
 
@@ -108,6 +109,7 @@
                                 <th scope="col">Rank</th>
                                 <th scope="col">Racer</th>
                                 <th scope="col">Time</th>
+                                <th scope="col">Z-Score</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -116,20 +118,22 @@
                                 <th scope="row" class="press-start"><?php echo $place; ?></th>
                                 <td class="audiowide">
                                 
-                                    <?php var_dump($recent_community_race->results); foreach ($recent_community_race->results as $result) {
-                                        if ($result->place == $place) { echo $result->player; }
-                                    }  ?>
+                                    <?php echo $recent_community_race->results[$place - 1]->player;  ?>
                                 </td>
-                                <td class="press-start">
-                                    <?php foreach ($recent_community_race->results as $racer => $value) {
-                                        if ($value->place == $place) { 
-                                            $hours = floor($value->time / 3600);
-                                            $minutes = floor($value->time / 60 % 60);
-                                            $seconds = floor($value->time % 60);
+                                <td class="press-start<?php echo $recent_community_race->results[$place - 1]->time === -1 ? ' negative-change' : ''; ?>">
+                                    <?php
+                                        if ($recent_community_race->results[$place - 1]->time !== -1) { 
+                                            $hours = floor($recent_community_race->results[$place - 1]->time/ 3600);
+                                            $minutes = floor($recent_community_race->results[$place - 1]->time / 60 % 60);
+                                            $seconds = floor($recent_community_race->results[$place - 1]->time % 60);
                                             echo sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
-                                        }
-                                    }  ?>
+                                        } else { echo 'Forfeit'; }
+                                      ?>
                                 </td>
+                                <td class="press-start<?php
+                                    if ($recent_community_race->results[$place - 1]->zScore < 0) { echo ' positive-change'; }
+                                    else if ($recent_community_race->results[$place - 1] > 0) {echo ' negative-change'; }
+                                ?>"><?php echo number_format($recent_community_race->results[$place - 1]->zScore, 3); ?></td>
                             </tr>
                         <?php endfor;?>
                         </tbody>
