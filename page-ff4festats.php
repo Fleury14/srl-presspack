@@ -58,6 +58,11 @@
     function dateCmp($race1, $race2) {
         return $race1->date - $race2->date;
     }
+
+    function placeCmp($result1, $result2) {
+        return $result1->place - $result2->place;
+    }
+    
     usort($league_qual_races, "winningTimeCmp");
     usort($league_ro32_races, "winningTimeCmp");
     usort($league_ro16_races, "winningTimeCmp");
