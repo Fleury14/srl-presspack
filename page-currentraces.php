@@ -41,7 +41,7 @@ foreach( $race_info->races as $race ) {
                     <div class="row row-eq-height full-race-row">
                         <div class="col-md-3 race-status">
                             <h2 class="audiowide"><?php echo $race->statetext; ?></h2>
-                            <p><?php echo 'Started at ' . date('h:m:sa T', $race->time) ?></p>
+                            <p><?php echo 'Started at ' . date('h:i:sa T', $race->time) ?></p>
                         </div>
                         <div class="col-md-9 race-info text-center">
                             <h2 class="text-center audiowide"><?php echo $race->numentrants ?> participant<?php if ($race->numentrants > 1) { echo 's'; } ?></h2>
