@@ -116,6 +116,35 @@
 	$league_ro32_last10avg = $league_ro32_last10sum / count($league_ro32_last10);
 	$league_ro16_last10avg = $league_ro16_last10sum / count($league_ro16_last10);
 
+	$opponents = array();
+	foreach ($all_my_races as $race) {
+		$myTime = findMyTime($race);
+		foreach ($race->results as $result) {
+			if ($result->player === $player_name) {
+				continue;
+			} else {
+				if (array_key_exists($result->player, $opponents) == false) {
+					$opponents[$result->player] = array(
+						"wins" => 0,
+						"losses" => 0
+					);
+					if ($result->time > $myTime) {
+						$opponents[$result->player]["wins"]++;
+					} else {
+						// var_dump($opponents[$result->player]);
+						$opponents[$result->player]["losses"]++;
+					}
+				} else {
+					if ($result->time > $myTime) {
+						$opponents[$result->player]["wins"]++;
+					} else {
+						$opponents[$result->player]["losses"]++;
+					}
+				}
+			}
+		}
+	}
+	var_dump($opponents);
 
 ?>
 
@@ -242,6 +271,7 @@
 						
 					</div>
 					<!--- End # of races in x days section -->
+					
 					<!--- Begin Flag type section -->
 					<div class="row">
 						<div class="col-sm-4 mini-table mr-0">
