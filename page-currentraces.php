@@ -41,7 +41,7 @@ foreach( $race_info->races as $race ) {
                     <div class="row row-eq-height full-race-row">
                         <div class="col-md-3 race-status">
                             <h2 class="audiowide"><?php echo $race->statetext; ?></h2>
-                            <p><?php echo 'Started at ' . date('h:m:sa T', $race->time) ?></p>
+                            <p><?php echo 'Started at ' . date('h:i:sa T', $race->time) ?></p>
                         </div>
                         <div class="col-md-9 race-info text-center">
                             <h2 class="text-center audiowide"><?php echo $race->numentrants ?> participant<?php if ($race->numentrants > 1) { echo 's'; } ?></h2>
@@ -75,7 +75,7 @@ foreach( $race_info->races as $race ) {
                                         $endFlagPos = strpos($race->goal, '&amp');
                                         $flags = substr($race->goal, $flagsPos + 6, $endFlagPos - $flagsPos - 6);
                                         ?>
-                                        <p>Flags: <?php echo $flags;
+                                        <p class="current-race-flags">Flags: <?php echo $flags;
                                             if ($flags == 'J2KC2T4S3BF2NE3$X2Y2GWZ') { echo ' (League Qualifier)'; }
                                             if ($flags == 'JK2PCT3S2BF2NE3X2Y2GZ') { echo ' (League Ro.32)'; }
                                             if ($flags == 'JK2PC3T3S2BF2NE3X2Y2GZ') { echo ' (League Playoffs)'; }
@@ -193,13 +193,13 @@ foreach( $race_info->races as $race ) {
                                     <tbody>
                                     <?php for ($place = 1; $place <= $race->numentrants; $place++ ): ?>
                                         <tr>
-                                            <th scope="row"><?php echo $place; ?></th>
-                                            <td>
+                                            <th scope="row" class="press-start"><?php echo $place; ?></th>
+                                            <td class="audiowide">
                                                 <?php foreach ($race->entrants as $racer => $value) {
                                                     if ($value->place == $place) { echo $value->displayname; }
                                                 }  ?>
                                             </td>
-                                            <td>
+                                            <td class="press-start">
                                                 <?php foreach ($race->entrants as $racer => $value) {
                                                     if ($value->place == $place) { 
                                                         $hours = floor($value->time / 3600);

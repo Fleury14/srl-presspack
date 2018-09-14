@@ -58,6 +58,11 @@
     function dateCmp($race1, $race2) {
         return $race1->date - $race2->date;
     }
+
+    function placeCmp($result1, $result2) {
+        return $result1->place - $result2->place;
+    }
+
     usort($league_qual_races, "winningTimeCmp");
     usort($league_ro32_races, "winningTimeCmp");
     usort($league_ro16_races, "winningTimeCmp");
@@ -65,6 +70,7 @@
     $recent_community_race = $community_races[count($community_races) - 1];
     zScore($recent_community_race);
     // var_dump($league_qual_races);
+    usort($recent_community_race->results, "placeCmp");
 
 ?>
 
@@ -97,24 +103,41 @@
                             <p class="m-0">Goal: <?php echo $recent_community_race->goal; ?></p>
                         </div>
                     </div>
-                    <div class="row p-3">
-                        <?php for($i = 0; $i < $recent_community_race->numentrants; $i++): ?>
-                        <div class="col-md-4 community-results">
-                            <p class="m-0 p-2 audiowide"><?php echo $recent_community_race->results[$i]->player ?>: <span class="press-start community-race-time"><?php
-                                if ($recent_community_race->results[$i]->time === -1) {
-                                    echo 'Forfeit';
-                                } else {
-                                    $hours = floor($recent_community_race->results[$i]->time / 3600);
-                                    $minutes = floor($recent_community_race->results[$i]->time / 60 % 60);
-                                    $seconds = floor($recent_community_race->results[$i]->time % 60);
-                                    echo sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);?></span></p>
-                                <?php } ?>
-                                <p class="z-score m-0 p-0">Rank: <?php echo $i + 1; ?> Z-S: <?php echo number_format($recent_community_race->results[$i]->zScore, 3, '.', ','); ?></p>
-
+                    <table class="table-sm table-striped w-100 ">
+                        <thead>
+                            <tr>
+                                <th scope="col">Rank</th>
+                                <th scope="col">Racer</th>
+                                <th scope="col">Time</th>
+                                <th scope="col">Z-Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php for ($place = 1; $place <= $recent_community_race->numentrants; $place++ ): ?>
+                            <tr>
+                                <th scope="row" class="press-start"><?php echo $place; ?></th>
+                                <td class="audiowide">
                                 
-                        </div>
-                        <?php endfor; ?>
-                    </div>
+                                    <?php echo $recent_community_race->results[$place - 1]->player;  ?>
+                                </td>
+                                <td class="press-start<?php echo $recent_community_race->results[$place - 1]->time === -1 ? ' negative-change' : ''; ?>">
+                                    <?php
+                                        if ($recent_community_race->results[$place - 1]->time !== -1) { 
+                                            $hours = floor($recent_community_race->results[$place - 1]->time/ 3600);
+                                            $minutes = floor($recent_community_race->results[$place - 1]->time / 60 % 60);
+                                            $seconds = floor($recent_community_race->results[$place - 1]->time % 60);
+                                            echo sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+                                        } else { echo 'Forfeit'; }
+                                      ?>
+                                </td>
+                                <td class="press-start<?php
+                                    if ($recent_community_race->results[$place - 1]->zScore < 0) { echo ' positive-change'; }
+                                    else if ($recent_community_race->results[$place - 1] > 0) {echo ' negative-change'; }
+                                ?>"><?php echo number_format($recent_community_race->results[$place - 1]->zScore, 3); ?></td>
+                            </tr>
+                        <?php endfor;?>
+                        </tbody>
+                    </table>
                 </div>
                 
             
@@ -168,8 +191,6 @@
                         </div>
                     </div>
                 </div>
-
-                <?php edit_post_link(); ?>
 
 			</article>
 			<!-- /article -->
