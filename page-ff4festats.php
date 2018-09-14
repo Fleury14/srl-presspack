@@ -97,24 +97,38 @@
                             <p class="m-0">Goal: <?php echo $recent_community_race->goal; ?></p>
                         </div>
                     </div>
-                    <div class="row p-3">
-                        <?php for($i = 0; $i < $recent_community_race->numentrants; $i++): ?>
-                        <div class="col-md-4 community-results">
-                            <p class="m-0 p-2 audiowide"><?php echo $recent_community_race->results[$i]->player ?>: <span class="press-start community-race-time"><?php
-                                if ($recent_community_race->results[$i]->time === -1) {
-                                    echo 'Forfeit';
-                                } else {
-                                    $hours = floor($recent_community_race->results[$i]->time / 3600);
-                                    $minutes = floor($recent_community_race->results[$i]->time / 60 % 60);
-                                    $seconds = floor($recent_community_race->results[$i]->time % 60);
-                                    echo sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);?></span></p>
-                                <?php } ?>
-                                <p class="z-score m-0 p-0">Rank: <?php echo $i + 1; ?> Z-S: <?php echo number_format($recent_community_race->results[$i]->zScore, 3, '.', ','); ?></p>
-
+                    <table class="table-sm table-striped w-100 ">
+                        <thead>
+                            <tr>
+                                <th scope="col">Rank</th>
+                                <th scope="col">Racer</th>
+                                <th scope="col">Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php for ($place = 1; $place <= $recent_community_race->numentrants; $place++ ): ?>
+                            <tr>
+                                <th scope="row" class="press-start"><?php echo $place; ?></th>
+                                <td class="audiowide">
                                 
-                        </div>
-                        <?php endfor; ?>
-                    </div>
+                                    <?php var_dump($recent_community_race->results); foreach ($recent_community_race->results as $result) {
+                                        if ($result->place == $place) { echo $result->player; }
+                                    }  ?>
+                                </td>
+                                <td class="press-start">
+                                    <?php foreach ($recent_community_race->results as $racer => $value) {
+                                        if ($value->place == $place) { 
+                                            $hours = floor($value->time / 3600);
+                                            $minutes = floor($value->time / 60 % 60);
+                                            $seconds = floor($value->time % 60);
+                                            echo sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+                                        }
+                                    }  ?>
+                                </td>
+                            </tr>
+                        <?php endfor;?>
+                        </tbody>
+                    </table>
                 </div>
                 
             
