@@ -133,14 +133,14 @@
 						"wins" => 0,
 						"losses" => 0
 					);
-					if ($result->time > $myTime || $result->time === -1) {
+					if (($result->time > $myTime || $result->time === -1) && $myTime !== -1) {
 						$opponents[$result->player]["wins"]++;
 					} else {
 						// var_dump($opponents[$result->player]);
 						$opponents[$result->player]["losses"]++;
 					}
 				} else {
-					if ($result->time > $myTime || $result->time === -1) {
+					if (($result->time > $myTime || $result->time === -1) && $myTime !== -1) {
 						$opponents[$result->player]["wins"]++;
 					} else {
 						$opponents[$result->player]["losses"]++;
@@ -277,9 +277,10 @@
 					</div>
 					<!--- End # of races in x days section -->
 					<!-- begin win-loss section -->
+					<h2 class="text-center mt-5">Win Loss record against other racers (Scrollable)</h2>
+
 					<div class="row win-loss-row">
 						<div class="col-sm-12">
-							<p>Win Loss record against other racers</p>
 						</div>
 						<?php foreach($opponents as $opponent=>$value):?>
 						<div class="col-sm-2 win-loss">

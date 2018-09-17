@@ -27,6 +27,23 @@
 
 }
 
+.win-loss-row {
+
+    width: 100%;
+    height: 500px;
+    margin-bottom: 100px;
+    overflow-y: scroll;
+
+    .win-loss {
+        font-size: 10px;
+        &:nth-child(odd) {
+            background-color: #aaa;
+        }
+    }
+
+    
+}
+
 .time-rows {
     margin-bottom: 100px;
 }
