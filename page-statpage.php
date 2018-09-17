@@ -44,7 +44,15 @@
     $leaderboard = json_decode($leaderboard_info);
     $total_players = $leaderboard->leadersCount;
     $player_list = $leaderboard->leaders;
-    usort($player_list, "placeCmp");
+	usort($player_list, "placeCmp");
+	
+	// get players rating
+	$myRating = 0;
+	foreach ($player_list as $leader) {
+		if (strtolower($leader->name) === strtolower($player_name)) {
+			$myRating = floor($leader->trueskill);
+		}
+	}
 	// var_dump($player_list);
 	function getPlayersRating($player) {
 		$rating = 0;
@@ -340,7 +348,7 @@
 						</div>
 						<?php foreach($opponents as $opponent=>$value):?>
 						<div class="col-sm-2 win-loss" style="background-color: rgb(0,0,<?php echo $value["wins"] / ($value["wins"] + $value["losses"]) * 200; ?> );">
-							<p class="audiowide"><?php echo $opponent; ?><span class="ml-1 badge badge-primary"><?php echo getPlayersRating($opponent); ?></span></p>
+							<p class="audiowide"><?php echo $opponent; ?><span class="ml-1 badge badge-<?php echo $myRating <= getPlayersRating($opponent) ? 'danger' : 'success' ?>"><?php echo getPlayersRating($opponent); ?></span></p>
 							<p class="press-start"><?php echo $value["wins"]; ?>-<?php echo $value["losses"]; ?></p>
 						</div>
 						<?php endforeach; ?>
