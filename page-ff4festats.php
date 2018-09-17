@@ -22,6 +22,28 @@
             "Content-Type: application/json"
         )
     ));
+
+    // get ranking list to allow for SRL rating to be displayed in w/l table
+    $leaderboard_curl = curl_init();
+    curl_setopt_array($leaderboard_curl, array(
+        CURLOPT_RETURNTRANSFER => 1,
+        CURLOPT_URL => 'http://api.speedrunslive.com/leaderboard/ff4hacks?season=0',
+        CURLOPT_HTTPHEADER => array(
+            "Content-Type: application/json"
+        )  
+    ));
+
+    function placeCmp($leader1, $leader2) {
+        return $leader1->rank - $leader2->rank;
+    }
+
+    $leaderboard_info = curl_exec($leaderboard_curl);
+    curl_close($leaderboard_curl);
+    $leaderboard = json_decode($leaderboard_info);
+    $total_players = $leaderboard->leadersCount;
+    $player_list = $leaderboard->leaders;
+    usort($player_list, "placeCmp");
+
     $general_info = curl_exec($general_curl);
     curl_close($general_curl);
     $ff4_info = json_decode($general_info);
