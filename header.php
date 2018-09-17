@@ -14,21 +14,17 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarText">
 			<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="/statpage">Player Stats</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="/ff4festats">Game Stats</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="/currentraces">Current Races</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="/player-rankings">Player Rankings</a>
-			</li>
+				<li class="nav-item<?php if(get_query_var('pagename') == '') echo (' active'); ?>">
+					<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<?php $list_of_pages = get_pages(); 
+				// var_dump($list_of_pages); 
+				foreach ($list_of_pages as $page): ?>
+				<li class="nav-item<?php if(get_query_var('pagename') == $page->post_name) echo (' active'); ?>">
+					<a href="/<?php echo $page->post_name ?>" class="nav-link"><?php echo $page->post_title ?></a>
+				</li>
+				<?php endforeach; ?>
+			
 			</ul>
 			<?php $userinfo = wp_get_current_user(); 
 			if($userinfo->display_name == null) {

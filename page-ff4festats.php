@@ -22,6 +22,7 @@
             "Content-Type: application/json"
         )
     ));
+
     $general_info = curl_exec($general_curl);
     curl_close($general_curl);
     $ff4_info = json_decode($general_info);

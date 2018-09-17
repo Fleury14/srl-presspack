@@ -24,7 +24,48 @@
 	$history = curl_exec($history_curl);
 	curl_close($history_curl);
 	$race_history = json_decode($history);
+
+	// get ranking list to allow for SRL rating to be displayed in w/l table
+    $leaderboard_curl = curl_init();
+    curl_setopt_array($leaderboard_curl, array(
+        CURLOPT_RETURNTRANSFER => 1,
+        CURLOPT_URL => 'http://api.speedrunslive.com/leaderboard/ff4hacks?season=0',
+        CURLOPT_HTTPHEADER => array(
+            "Content-Type: application/json"
+        )  
+	));
 	
+	function placeCmp($leader1, $leader2) {
+        return $leader1->rank - $leader2->rank;
+    }
+
+    $leaderboard_info = curl_exec($leaderboard_curl);
+    curl_close($leaderboard_curl);
+    $leaderboard = json_decode($leaderboard_info);
+    $total_players = $leaderboard->leadersCount;
+    $player_list = $leaderboard->leaders;
+	usort($player_list, "placeCmp");
+	
+	// get players rating
+	$myRating = 0;
+	foreach ($player_list as $leader) {
+		if (strtolower($leader->name) === strtolower($player_name)) {
+			$myRating = floor($leader->trueskill);
+		}
+	}
+	// var_dump($player_list);
+	function getPlayersRating($player) {
+		$rating = 0;
+		global $player_list;
+		global $total_players;
+
+        foreach ($player_list as $leader) {
+            if (strtolower($leader->name) === strtolower($player)) {
+                $rating = floor($leader->trueskill);
+            }
+		}
+		return $rating;
+    }
 	
 	// go through races and increment last week, two weeks and 30 days if necessary
 	// throw all league flag races into its respective array
@@ -75,10 +116,33 @@
 	 usort($league_ro32_races, "timeCmp");
 	 usort($league_ro16_races, "timeCmp");
 
-	
-	$league_qual_best = $league_qual_races[0]->results[0]->time;
-	$league_ro32_best = $league_ro32_races[0]->results[0]->time;
-	$league_ro16_best = $league_ro16_races[0]->results[0]->time;
+	// go through all three arrays, pull users time and compare with best time, replace is necessary
+	$league_qual_best = 99999;
+
+	foreach ($league_qual_races as $race) {
+		$myTime = findMyTime($race);
+		if ($myTime < $league_qual_best && $myTime !== null ) {
+			$league_qual_best = $myTime;
+		}
+	}
+
+	$league_ro32_best = 99999;
+
+	foreach ($league_ro32_races as $race) {
+		$myTime = findMyTime($race);
+		if ($myTime < $league_ro32_best && $myTime !== null ) {
+			$league_ro32_best = $myTime;
+		}
+	}
+
+	$league_ro16_best = 99999;
+
+	foreach ($league_ro16_races as $race) {
+		$myTime = findMyTime($race);
+		if ($myTime < $league_ro16_best && $myTime !== null ) {
+			$league_ro16_best = $myTime;
+		}
+	}
 
 	// sort races by date then put the top 10 in an array. Also while grabbing each race, get a time sum for averaging
 
@@ -95,7 +159,6 @@
 	$league_qual_last10sum = $league_ro32_last10sum = $league_ro16_last10sum = 0;
 	
 	for ($i = 0; $i < 10; $i++) {
-		// array_push($last_10_overall, $race_history->pastraces[9 - $i]);
 		array_push($league_qual_last10, $league_qual_races[$i]);
 		$league_qual_last10sum += findMyTime($league_qual_races[$i]);
 		array_push($league_ro32_last10, $league_ro32_races[$i]);
@@ -105,7 +168,6 @@
 			$league_ro16_last10sum += findMyTime($league_ro16_races[$i]);
 		}
 		
-		// echo 'ro16.time' . findMyTime($league_ro16_races[$i]);
 	}
 
 	$league_qual_last10 = array_filter($league_qual_last10);
@@ -285,8 +347,8 @@
 						<div class="col-sm-12">
 						</div>
 						<?php foreach($opponents as $opponent=>$value):?>
-						<div class="col-sm-2 win-loss">
-							<p class="audiowide"><?php echo $opponent; ?></p>
+						<div class="col-sm-2 win-loss" style="background-color: rgb(0,0,<?php echo $value["wins"] / ($value["wins"] + $value["losses"]) * 200; ?> );">
+							<p class="audiowide"><?php echo $opponent; ?><span class="ml-1 badge badge-<?php echo $myRating <= getPlayersRating($opponent) ? 'danger' : 'success' ?>"><?php echo getPlayersRating($opponent); ?></span></p>
 							<p class="press-start"><?php echo $value["wins"]; ?>-<?php echo $value["losses"]; ?></p>
 						</div>
 						<?php endforeach; ?>
@@ -395,9 +457,6 @@
 			
 				<?php the_content(); ?>
 				
-
-				<?php edit_post_link(); ?>
-
 			</article>
 			<!-- /article -->
 
