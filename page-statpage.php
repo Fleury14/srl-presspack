@@ -116,6 +116,42 @@
 	$league_ro32_last10avg = $league_ro32_last10sum / count($league_ro32_last10);
 	$league_ro16_last10avg = $league_ro16_last10sum / count($league_ro16_last10);
 
+	$opponents = array();
+
+	function totalGamesCmp($player1, $player2) {
+		return ($player2["wins"] + $player2["losses"]) - ($player1["wins"] + $player1["losses"]);
+	}
+
+	foreach ($all_my_races as $race) {
+		$myTime = findMyTime($race);
+		foreach ($race->results as $result) {
+			if (strtolower($result->player) === strtolower($player_name)) {
+				continue;
+			} else if ($result->time === -1 && $myTime === null) {
+				continue;
+			} else {
+				if (array_key_exists($result->player, $opponents) == false) {
+					$opponents[$result->player] = array(
+						"wins" => 0,
+						"losses" => 0
+					);
+					if (($result->time > $myTime || $result->time === -1) && $myTime !== null) {
+						$opponents[$result->player]["wins"]++;
+					} else {
+						// var_dump($opponents[$result->player]);
+						$opponents[$result->player]["losses"]++;
+					}
+				} else {
+					if (($result->time > $myTime || $result->time === -1) && $myTime !== null) {
+						$opponents[$result->player]["wins"]++;
+					} else {
+						$opponents[$result->player]["losses"]++;
+					}
+				}
+			}
+		}
+	}
+	uasort($opponents, "totalGamesCmp");
 
 ?>
 
@@ -242,6 +278,20 @@
 						
 					</div>
 					<!--- End # of races in x days section -->
+					<!-- begin win-loss section -->
+					<h2 class="text-center mt-5">Win Loss record against other racers (Scrollable)</h2>
+
+					<div class="row win-loss-row">
+						<div class="col-sm-12">
+						</div>
+						<?php foreach($opponents as $opponent=>$value):?>
+						<div class="col-sm-2 win-loss">
+							<p class="audiowide"><?php echo $opponent; ?></p>
+							<p class="press-start"><?php echo $value["wins"]; ?>-<?php echo $value["losses"]; ?></p>
+						</div>
+						<?php endforeach; ?>
+					</div>
+					<!-- End win-loss section -->
 					<!--- Begin Flag type section -->
 					<div class="row">
 						<div class="col-sm-4 mini-table mr-0">
