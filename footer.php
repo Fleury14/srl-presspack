@@ -7,10 +7,10 @@
 				</div>
 				<div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
 					<a href="/">Home</a>
-					<a href="/currentraces">Current Races</a>
-					<a href="/statpage">Player Stats</a>
-					<a href="/ff4festats">Game Stats</a>
-					<a href="/player-rankings">Player Rankings</a>
+				<?php $list_of_pages = get_pages();
+				foreach ($list_of_pages as $page): ?>
+					<a href="/<?php echo $page->post_name ?>"><?php echo $page->post_title ?></a>
+				<?php endforeach; ?>
 				</div>
 			</div>
 		</div>
