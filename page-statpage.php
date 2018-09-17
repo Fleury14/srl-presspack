@@ -127,20 +127,22 @@
 		foreach ($race->results as $result) {
 			if (strtolower($result->player) === strtolower($player_name)) {
 				continue;
+			} else if ($result->time === -1 && $myTime === null) {
+				continue;
 			} else {
 				if (array_key_exists($result->player, $opponents) == false) {
 					$opponents[$result->player] = array(
 						"wins" => 0,
 						"losses" => 0
 					);
-					if (($result->time > $myTime || $result->time === -1) && $myTime !== -1) {
+					if (($result->time > $myTime || $result->time === -1) && $myTime !== null) {
 						$opponents[$result->player]["wins"]++;
 					} else {
 						// var_dump($opponents[$result->player]);
 						$opponents[$result->player]["losses"]++;
 					}
 				} else {
-					if (($result->time > $myTime || $result->time === -1) && $myTime !== -1) {
+					if (($result->time > $myTime || $result->time === -1) && $myTime !== null) {
 						$opponents[$result->player]["wins"]++;
 					} else {
 						$opponents[$result->player]["losses"]++;
