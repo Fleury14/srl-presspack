@@ -118,7 +118,6 @@
 	$league_qual_last10sum = $league_ro32_last10sum = $league_ro16_last10sum = 0;
 	
 	for ($i = 0; $i < 10; $i++) {
-		// array_push($last_10_overall, $race_history->pastraces[9 - $i]);
 		array_push($league_qual_last10, $league_qual_races[$i]);
 		$league_qual_last10sum += findMyTime($league_qual_races[$i]);
 		array_push($league_ro32_last10, $league_ro32_races[$i]);
@@ -128,7 +127,6 @@
 			$league_ro16_last10sum += findMyTime($league_ro16_races[$i]);
 		}
 		
-		// echo 'ro16.time' . findMyTime($league_ro16_races[$i]);
 	}
 
 	$league_qual_last10 = array_filter($league_qual_last10);
@@ -308,7 +306,7 @@
 						<div class="col-sm-12">
 						</div>
 						<?php foreach($opponents as $opponent=>$value):?>
-						<div class="col-sm-2 win-loss">
+						<div class="col-sm-2 win-loss" style="background-color: rgb(0,0,<?php echo $value["wins"] / ($value["wins"] + $value["losses"]) * 200; ?> );">
 							<p class="audiowide"><?php echo $opponent; ?></p>
 							<p class="press-start"><?php echo $value["wins"]; ?>-<?php echo $value["losses"]; ?></p>
 						</div>
