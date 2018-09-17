@@ -75,10 +75,33 @@
 	 usort($league_ro32_races, "timeCmp");
 	 usort($league_ro16_races, "timeCmp");
 
-	
-	$league_qual_best = $league_qual_races[0]->results[0]->time;
-	$league_ro32_best = $league_ro32_races[0]->results[0]->time;
-	$league_ro16_best = $league_ro16_races[0]->results[0]->time;
+	// go through all three arrays, pull users time and compare with best time, replace is necessary
+	$league_qual_best = 99999;
+
+	foreach ($league_qual_races as $race) {
+		$myTime = findMyTime($race);
+		if ($myTime < $league_qual_best && $myTime !== null ) {
+			$league_qual_best = $myTime;
+		}
+	}
+
+	$league_ro32_best = 99999;
+
+	foreach ($league_ro32_races as $race) {
+		$myTime = findMyTime($race);
+		if ($myTime < $league_ro32_best && $myTime !== null ) {
+			$league_ro32_best = $myTime;
+		}
+	}
+
+	$league_ro16_best = 99999;
+
+	foreach ($league_ro16_races as $race) {
+		$myTime = findMyTime($race);
+		if ($myTime < $league_ro16_best && $myTime !== null ) {
+			$league_ro16_best = $myTime;
+		}
+	}
 
 	// sort races by date then put the top 10 in an array. Also while grabbing each race, get a time sum for averaging
 
