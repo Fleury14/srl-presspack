@@ -40,6 +40,9 @@ $curl = curl_init();
 				<?php if ($overall_stats->stats->rank !== null): ?>
 				<p>Rank: <?php echo $overall_stats->stats->rank; ?></p>
 				<?php endif; ?>
+				<?php if ($overall_stats->player->channel !==  null && $overall_stats->player->api == 'twitch'): ?>
+				<a href="http://twitch.tv/<?php echo $overall_stats->player->channel; ?>" target="_blank"><button class="twitch-button">Twitch Channel</button></a>
+				<?php endif; ?>
 				<form method="POST" action="\submission-complete">
 					<label for="nick">New Nickname</label>
 					<input name="nick" type="text">
