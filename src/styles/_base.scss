@@ -219,9 +219,15 @@ footer {
 
 .twitch-button {
   padding: 10px;
-  border-radius: 3px;
+  border-radius: 5px;
   background-color: #bb33bb;
   color: #eee;
+  transition: 0.2s all;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken(#bb33bb, 10);
+  }
 }
 
 /* END USER INFOP STYLE */

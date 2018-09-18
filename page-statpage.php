@@ -234,6 +234,9 @@
 						<div class="col-md-6 text-center">
 							<p>Date of first race</p>
 							<h2><?php echo date("F jS, Y", $overall_stats->stats->firstRaceDate); ?></h2>
+							<?php if ($overall_stats->player->channel !==  null && $overall_stats->player->api == 'twitch'): ?>
+							<a href="http://twitch.tv/<?php echo $overall_stats->player->channel; ?>" target="_blank"><button class="twitch-button mt-3">Twitch Channel</button></a>
+							<?php endif; ?>
 						</div>
 						<div class="col-md-6 text-center">
 							<p>Total time played</p>
