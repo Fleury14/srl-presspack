@@ -1,6 +1,18 @@
 <?php get_header();
 
 $current_user = wp_get_current_user();
+
+?><h1 class="mt-5 mb-5">z</h1><?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['nick'])) {
+	?><p>Changing name to.... <?php echo $_POST['nick']; ?></p><?php
+	wp_update_user( array(
+		'ID' => $current_user->ID,
+		'display_name' => $_POST['nick']
+	) );
+}
+
+
+
 // get user info based on display name
 $curl = curl_init();
 	curl_setopt_array($curl, array(
@@ -13,6 +25,7 @@ $curl = curl_init();
 	$info = curl_exec($curl);
 	curl_close($curl);
 	$overall_stats = json_decode($info);
+
 ?>
 
 	<main role="main" aria-label="Content">
@@ -38,7 +51,7 @@ $curl = curl_init();
 				<?php if ($overall_stats->stats->rank !== null): ?>
 				<p>Rank: <?php echo $overall_stats->stats->rank; ?></p>
 				<?php endif; ?>
-				<form method="POST" action="change-nick.php">
+				<form method="POST" action="<?php the_permalink(); ?>">
 					<label for="nick">New Nickname</label>
 					<input name="nick" type="text">
 					<button type="submit">Change Name</button>
