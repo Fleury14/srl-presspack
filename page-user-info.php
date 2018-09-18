@@ -38,6 +38,11 @@ $curl = curl_init();
 				<?php if ($overall_stats->stats->rank !== null): ?>
 				<p>Rank: <?php echo $overall_stats->stats->rank; ?></p>
 				<?php endif; ?>
+				<form method="POST" action="change-nick.php">
+					<label for="nick">New Nickname</label>
+					<input name="nick" type="text">
+					<button type="submit">Change Name</button>
+				</form>
 				
 			</article>
 			<!-- /article -->
