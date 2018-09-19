@@ -41,7 +41,7 @@ $curl = curl_init();
 						<p><strong>Display Name:</strong></p>
 						<p><?php echo $current_user->display_name; ?></p>
 					</div>
-					<?php if ($overall_stats->errorCode == 404): ?>
+					<?php if (empty($overall_stats)): ?>
 					<p>There is no SRL data for your nickname.</p>
 					<?php endif; ?>
 					<?php if ($overall_stats->stats->rank !== null): ?>
