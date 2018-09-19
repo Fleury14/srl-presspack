@@ -20,10 +20,11 @@
 				<?php $list_of_pages = get_pages(); 
 				// var_dump($list_of_pages); 
 				foreach ($list_of_pages as $page): ?>
+				<?php if ($page->post_name !== 'submission-complete'): ?>
 				<li class="nav-item<?php if(get_query_var('pagename') == $page->post_name) echo (' active'); ?>">
 					<a href="/<?php echo $page->post_name ?>" class="nav-link"><?php echo $page->post_title ?></a>
 				</li>
-				<?php endforeach; ?>
+				<?php endif; endforeach; ?>
 			
 			</ul>
 			<?php $userinfo = wp_get_current_user(); 

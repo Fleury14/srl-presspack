@@ -234,6 +234,9 @@
 						<div class="col-md-6 text-center">
 							<p>Date of first race</p>
 							<h2><?php echo date("F jS, Y", $overall_stats->stats->firstRaceDate); ?></h2>
+							<?php if ($overall_stats->player->channel !==  null && $overall_stats->player->api == 'twitch'): ?>
+							<a href="http://twitch.tv/<?php echo $overall_stats->player->channel; ?>" target="_blank"><button class="twitch-button mt-3">Twitch Channel</button></a>
+							<?php endif; ?>
 						</div>
 						<div class="col-md-6 text-center">
 							<p>Total time played</p>
@@ -274,24 +277,24 @@
 					<div class="row summary-margin">
 						<div class="col-md-3 summary-left">
 							<p>Total Races:</p>
-							<h2><?php echo $overall_stats->stats->totalRaces; ?></h2>
+							<h2 class="audiowide"><?php echo $overall_stats->stats->totalRaces; ?></h2>
 						</div>
 						<div class="col-md-3 summary-mid">
 							<div class="summary-row">
 								<p>1st place finishes:</p>
-								<p><?php echo $overall_stats->stats->totalFirstPlace; ?></p>
+								<p class="audiowide"><?php echo $overall_stats->stats->totalFirstPlace; ?></p>
 							</div>
 							<div class="summary-row">
 								<p>2nd place finishes:</p>
-								<p><?php echo $overall_stats->stats->totalSecondPlace; ?></p>
+								<p class="audiowide"><?php echo $overall_stats->stats->totalSecondPlace; ?></p>
 							</div>
 							<div class="summary-row">
 								<p>3rd place finishes:</p>
-								<p><?php echo $overall_stats->stats->totalThirdPlace; ?></p>
+								<p class="audiowide"><?php echo $overall_stats->stats->totalThirdPlace; ?></p>
 							</div>
 							<div class="summary-row">
 								<p>Forfeits:</p>
-								<p><?php echo $overall_stats->stats->totalQuits; ?></p>
+								<p class="audiowide"><?php echo $overall_stats->stats->totalQuits; ?></p>
 							</div>
 						</div>
 						<div class="col-md-6 summary-right">
@@ -322,19 +325,19 @@
 						<div class="col-md-4">
 							<div class="p-3 x-days d-flex flex-column text-center">
 								<p>Races in last 7 days</p>
-								<h2><?php echo $past_7_days; ?></h2>
+								<h2 class="audiowide"><?php echo $past_7_days; ?></h2>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="p-3 x-days d-flex flex-column text-center">
 								<p>Races in last 14 days</p>
-								<h2><?php echo $past_14_days; ?></h2>
+								<h2 class="audiowide"><?php echo $past_14_days; ?></h2>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="p-3 x-days d-flex flex-column text-center">
 								<p>Races in last 30 days</p>
-								<h2><?php echo $past_30_days; ?></h2>
+								<h2 class="audiowide"><?php echo $past_30_days; ?></h2>
 							</div>
 						</div>
 						

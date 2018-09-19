@@ -214,3 +214,30 @@ footer {
 }
 
 /* END FOOTER STYLES */
+
+/* BRGIN USER INFO STYLES */
+
+.twitch-button {
+  border-radius: 5px;
+  background-color: #bb33bb;
+  color: #eee;
+  transition: 0.2s all;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken(#bb33bb, 10);
+  }
+}
+
+.info-container {
+  width: 90%;
+  background-color: lighten(#010065, 70);
+  margin-left: 5%;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 10px 10px 10px lighten(#010065, 0)
+}
+
+/* END USER INFOP STYLE */
