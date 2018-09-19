@@ -55,7 +55,7 @@ $curl = curl_init();
 						<a href="/statpage/?player=<?php echo $current_user->display_name ?>"><button class="btn btn-primary">View My Stats</button></a>
 						<?php endif; ?>
 					</div>
-					
+					<div class="hr hr-primary"></div>
 					<form method="POST" class="mt-4" action="\submission-complete">
 						<h3 for="nick">Change Your Nickname?</h3>
 						<div class="d-flex">
