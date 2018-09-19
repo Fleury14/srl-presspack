@@ -29,15 +29,25 @@ $curl = curl_init();
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			
 				<div class="info-container">
-					<p><strong>User name:</strong> <?php echo $current_user->user_login; ?></p>
-					<p><strong>Email:</strong> <?php echo $current_user->user_email; ?></p>
-					<p><strong>Display Name:</strong> <?php echo $current_user->display_name; ?></p>
-					
+					<div class="info-row">
+						<p><strong>User name:</strong></p>
+						<p><?php echo $current_user->user_login; ?></p>
+					</div>
+					<div class="info-row">
+						<p><strong>Email:</strong></p>
+						<p><?php echo $current_user->user_email; ?></p>
+					</div>
+					<div class="info-row">
+						<p><strong>Display Name:</strong></p>
+						<p><?php echo $current_user->display_name; ?></p>
+					</div>
 					<?php if ($overall_stats->errorCode == 404): ?>
 					<p>There is no SRL data for your nickname.</p>
 					<?php endif; ?>
 					<?php if ($overall_stats->stats->rank !== null): ?>
-					<p><strong>Rank:</strong><span class="audiowide ml-3"><?php echo $overall_stats->stats->rank; ?></span></p>
+					<div class="info-row">
+						<p><strong>Rank:</strong><span class="audiowide ml-3"></p><p><?php echo $overall_stats->stats->rank; ?></span></p>
+					</div>
 					<?php endif; ?>
 					<div class="mb-3">
 						<?php if ($overall_stats->player->channel !==  null && $overall_stats->player->api == 'twitch'): ?>

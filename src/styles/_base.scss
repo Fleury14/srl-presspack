@@ -237,7 +237,13 @@ footer {
   display: flex;
   align-items: center;
   flex-direction: column;
-  box-shadow: 10px 10px 10px lighten(#010065, 0)
+  box-shadow: 10px 10px 10px lighten(#010065, 0);
+
+  .info-row {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 /* END USER INFOP STYLE */
