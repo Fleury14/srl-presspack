@@ -42,7 +42,7 @@ $curl = curl_init();
 						<p><?php echo $current_user->display_name; ?></p>
 					</div>
 					<?php if (empty($overall_stats)): ?>
-					<p>There is no SRL data for your nickname.</p>
+					<p class="alert-danger p-2">There is no SRL data for your nickname.</p>
 					<?php endif; ?>
 					<?php if ($overall_stats->stats->rank !== null): ?>
 					<div class="info-row">
