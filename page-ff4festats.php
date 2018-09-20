@@ -95,6 +95,7 @@
                         </div>
                     </div>
                 </div>
+                <div id="heatmap-canvas"></div>
                 <h2 class="press-start text-uppercase text-center mt-5">Community Races</h2>
                 <p class="text-center"><?php echo count($community_races); ?> Community Races on record</p>
                 <p class="press-start text-center text-uppercase">Recent race summary</p>
