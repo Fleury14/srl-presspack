@@ -58,8 +58,8 @@ $curl = curl_init();
 					<div class="hr hr-primary"></div>
 					<form method="POST" class="mt-4" action="\submission-complete">
 						<h3 for="nick">Change Your Nickname?</h3>
-						<div class="d-flex">
-							<input name="nick" type="text" class="mr-2">
+						<div class="d-flex mt-3">
+							<input name="nick" type="text" class="mr-4">
 							<button type="submit" class="btn btn-primary">Change Name</button>
 						</div>
 						
