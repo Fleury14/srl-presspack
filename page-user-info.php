@@ -29,15 +29,25 @@ $curl = curl_init();
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			
 				<div class="info-container">
-					<p><strong>User name:</strong> <?php echo $current_user->user_login; ?></p>
-					<p><strong>Email:</strong> <?php echo $current_user->user_email; ?></p>
-					<p><strong>Display Name:</strong> <?php echo $current_user->display_name; ?></p>
-					
-					<?php if ($overall_stats->errorCode == 404): ?>
-					<p>There is no SRL data for your nickname.</p>
+					<div class="info-row">
+						<p><strong>User name:</strong></p>
+						<p><?php echo $current_user->user_login; ?></p>
+					</div>
+					<div class="info-row">
+						<p><strong>Email:</strong></p>
+						<p><?php echo $current_user->user_email; ?></p>
+					</div>
+					<div class="info-row">
+						<p><strong>Display Name:</strong></p>
+						<p><?php echo $current_user->display_name; ?></p>
+					</div>
+					<?php if (empty($overall_stats)): ?>
+					<p class="alert-danger p-2">There is no SRL data for your nickname.</p>
 					<?php endif; ?>
 					<?php if ($overall_stats->stats->rank !== null): ?>
-					<p><strong>Rank:</strong><span class="audiowide ml-3"><?php echo $overall_stats->stats->rank; ?></span></p>
+					<div class="info-row">
+						<p><strong>Rank:</strong><span class="audiowide ml-3"></p><p><?php echo $overall_stats->stats->rank; ?></span></p>
+					</div>
 					<?php endif; ?>
 					<div class="mb-3">
 						<?php if ($overall_stats->player->channel !==  null && $overall_stats->player->api == 'twitch'): ?>
@@ -45,11 +55,11 @@ $curl = curl_init();
 						<a href="/statpage/?player=<?php echo $current_user->display_name ?>"><button class="btn btn-primary">View My Stats</button></a>
 						<?php endif; ?>
 					</div>
-					
+					<div class="hr hr-primary"></div>
 					<form method="POST" class="mt-4" action="\submission-complete">
 						<h3 for="nick">Change Your Nickname?</h3>
-						<div class="d-flex">
-							<input name="nick" type="text" class="mr-2">
+						<div class="d-flex mt-3">
+							<input name="nick" type="text" class="mr-4">
 							<button type="submit" class="btn btn-primary">Change Name</button>
 						</div>
 						
