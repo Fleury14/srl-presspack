@@ -10,6 +10,13 @@
     }
 }
 
+.flag-stats-flag {
+    transition: 0.4s all;
+    &:hover {
+        background-color: #777;
+    }
+}
+
 .mini-table {
     border: 2px solid #010065;
     margin-right: 8%;

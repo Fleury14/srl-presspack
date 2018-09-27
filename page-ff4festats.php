@@ -313,7 +313,7 @@
                     <tbody>
                     <?php foreach($race_flags as $flag=>$value): ?>
                         <tr>
-                            <th class="audiowide" data-toggle="tooltip" data-placement="top" data-delay="{'hide': 5000}" title="<?php echo $value['description']; ?>"><?php echo $flag ?></th>
+                            <th class="audiowide flag-stats-flag" data-toggle="tooltip" data-placement="top" data-delay="{'show': 5, 'hide': 5000}" title="<?php echo $value['description']; ?>"><?php echo $flag ?></th>
                             <?php for ($number = 0; $number < 6; $number++): 
                                 if ($value[$number] !== null):
                                 ?>
