@@ -1,5 +1,9 @@
 <?php get_header();
-	$player_name = $_GET['player'] ? $_GET['player'] : 'Fleury14';
+	// $player_name = $_GET['player'] ? $_GET['player'] : 'Fleury14';
+	$current_user = wp_get_current_user();
+	if ($_GET['player']) { $player_name = $_GET['player']; }
+	elseif ($current_user->display_name) { $player_name = $current_user->display_name; }
+	else { $player_name = 'Bob'; }
 	// FF4 target profile stat curl
 	$curl = curl_init();
 	curl_setopt_array($curl, array(
