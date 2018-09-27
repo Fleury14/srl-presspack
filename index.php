@@ -8,7 +8,7 @@
     <div class="col-sm-8">
       <?php if (have_posts()): while (have_posts()) : the_post() ?>
       <article>
-        <h3> <?php the_title(); ?></h3>
+        <a href="<?php the_permalink(); ?>"><h3> <?php the_title(); ?></h3></a>
         <p class="sub-text text-uppercase">Created by <?php the_author(); ?> on <?php the_date(); ?></p>
         <p> <?php the_content(); ?> </p>
       </article>
