@@ -19,7 +19,7 @@ foreach( $race_info->races as $race ) {
   <h1 class="display-4 text-center">FF4 FE Race Stats</h1>
 </div>
 <div class="current-races-banner d-flex justify-content-center align-items-center mb-5">
-  <a href="currentraces"><h2 class="text-center audiowide">There are <?php echo count($ff4races); ?> race<? echo count($ff4races) !== 1 ? 's' : '' ?> currently being run.</h2></a>
+  <a href="currentraces"><h2 class="text-center audiowide">There <? echo count($ff4races) !== 1 ? 'are' : 'is' ?> <?php echo count($ff4races); ?> race<? echo count($ff4races) !== 1 ? 's' : '' ?> currently being run.</h2></a>
 </div>
 <!-- <p>Photo by Donald Giannatti on Unsplash</p> -->
 <div class="container">
