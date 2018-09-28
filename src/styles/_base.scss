@@ -66,6 +66,17 @@ html {
   }
 }
 
+.ticker-row {
+  width: 100%;
+  background-color: #333;
+  height: 100px;
+
+  .ticker-col {
+    color: #eee;
+    height: 100px;
+  }
+}
+
 .accordion-link {
   color: #eee;
   width: 100%;

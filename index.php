@@ -18,8 +18,19 @@ foreach( $race_info->races as $race ) {
 <div class="jumbotron mb-0">
   <h1 class="display-4 text-center">FF4 FE Race Stats</h1>
 </div>
-<div class="current-races-banner d-flex justify-content-center align-items-center mb-5">
+<div class="current-races-banner d-flex justify-content-center align-items-center">
   <a href="currentraces"><h2 class="text-center audiowide">There <? echo count($ff4races) !== 1 ? 'are' : 'is' ?> <?php echo count($ff4races); ?> race<? echo count($ff4races) !== 1 ? 's' : '' ?> currently being run.</h2></a>
+</div>
+<div class="container-fluid ticker-row mb-5">
+  <div class="row">
+    <div class="col-sm-1 col-xs-hidden d-flex justify-content-center align-items-center ticker-col"><</div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-1 col-xs-hidden d-flex justify-content-center align-items-center ticker-col">></div>
+  </div>
 </div>
 <!-- <p>Photo by Donald Giannatti on Unsplash</p> -->
 <div class="container">
