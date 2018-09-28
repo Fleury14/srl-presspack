@@ -1,4 +1,22 @@
-<?php get_header(); 
+<?php get_header();
+
+date_default_timezone_set('America/New_York');
+
+// Grab all race data
+$history_curl = curl_init();
+curl_setopt_array($history_curl, array(
+    CURLOPT_RETURNTRANSFER => 1,
+    CURLOPT_URL => 'http://api.speedrunslive.com/pastraces?game=ff4hacks&season=0&page=1&pageSize=10',
+    CURLOPT_HTTPHEADER => array(
+        "Content-Type: application/json"
+    )  
+));
+$info = curl_exec($history_curl);
+curl_close($history_curl);
+$past_races = json_decode($info);
+$recent_start = 0;
+$recent_end = 4;
+
 $curl = curl_init();
 curl_setopt_array($curl, array(
     CURLOPT_RETURNTRANSFER => 1,
@@ -18,8 +36,21 @@ foreach( $race_info->races as $race ) {
 <div class="jumbotron mb-0">
   <h1 class="display-4 text-center">FF4 FE Race Stats</h1>
 </div>
-<div class="current-races-banner d-flex justify-content-center align-items-center mb-5">
+<div class="current-races-banner d-flex justify-content-center align-items-center">
   <a href="currentraces"><h2 class="text-center audiowide">There <? echo count($ff4races) !== 1 ? 'are' : 'is' ?> <?php echo count($ff4races); ?> race<? echo count($ff4races) !== 1 ? 's' : '' ?> currently being run.</h2></a>
+</div>
+<div class="container-fluid ticker-row mb-5">
+  <div class="row">
+    <div class="col-sm-1 col-xs-hidden d-flex justify-content-center align-items-center ticker-col"></div>
+    <?php for ($i = $recent_start; $i <= $recent_end; $i++): ?>
+      <div class="col-sm-2 recent-cell d-flex justify-content-center flex-column p-1">
+        <p class="mb-0"><u class="recent-cell-header"><?php echo date('n/d g:ia T ', $past_races->pastraces[$i]->date); ?></u></p>
+        <p class="mb-0"><strong class="gold-text">1st:</strong> <?php echo $past_races->pastraces[$i]->results[0]->player; ?></p>
+        <p class="mb-0"><strong class="silver-text">2nd:</strong> <?php echo $past_races->pastraces[$i]->results[1]->player; ?></p>
+        <p class="mb-0"><strong class="bronze-text">3rd:</strong> <?php echo $past_races->pastraces[$i]->results[2]->player; ?></p>
+      </div>
+    <?php endfor; ?>
+  </div>
 </div>
 <!-- <p>Photo by Donald Giannatti on Unsplash</p> -->
 <div class="container">

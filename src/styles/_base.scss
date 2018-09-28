@@ -66,6 +66,41 @@ html {
   }
 }
 
+.ticker-row {
+  width: 100%;
+  background-color: #333;
+  height: 100px;
+
+  .ticker-col {
+    color: #eee;
+    height: 100px;
+  }
+
+  .recent-cell {
+    color: #eee;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .recent-cell-header {
+   font-weight: 700;
+   font-size: 14px;
+   color: lighten(#010065, 70); 
+  }
+}
+
+.gold-text {
+  color: gold;
+}
+
+.silver-text {
+  color: silver;
+}
+
+.bronze-text {
+  color: burlywood;
+}
+
 .accordion-link {
   color: #eee;
   width: 100%;
